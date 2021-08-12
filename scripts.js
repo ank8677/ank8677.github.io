@@ -61,7 +61,21 @@ let data0 = {
 
   console.log(data7);
 
- 
+  let smallPhotos = ['images/1.png', 'images/2.png', 'images/3.png', 'images/4.png', 'images/5.png', 'images/6.png', 'images/7.png', 'images/8.png'];
+  console.log(smallPhotos);
+  
+  smallPhotos.forEach ((smallPhoto, index) => {
+    $('.thumbnails').append(`<div class="thumbnailPhoto visible"><img src = "${smallPhoto}" data-number ="${index}"></div>`);
+    console.log(smallPhoto,index);
+  });
+  
+  let smallPhotosTitles = ['Inside the Forest', 'Lucky Leaves', 'Rainbow', 'Happy Flowers', 'Forest Lake', 'Beauty in Nature', 'Butterflies', 'Towards the Sun...']
+  console.log(smallPhotosTitles);
+  
+  smallPhotosTitles.forEach ((smallPhotoTitle, index) => {
+    $('.title').append(`<div class="thumbnailTitles" data-number="${index}"><p>${smallPhotoTitle} </p></div>`);
+    console.log(smallPhotoTitle,index);
+  });
 
   let loadPhoto = (photoNumber) => {
     $('#photo').attr('src', imagesData[photoNumber].photo);
@@ -69,8 +83,13 @@ let data0 = {
     $('#photo-description').text(imagesData[photoNumber].description);
     };
 
+  let activateThumbnailPhoto = (photoNumber) => {
+	  $('.thumbnailPhoto').removeClass('activeThumbnailPhoto');
+	  $('.thumbnailPhoto:eq(' + (photoNumber) + ')').addClass('activeThumbnailPhoto');
+  };
 
   loadPhoto(currentPhoto);
+  activateThumbnailPhoto(currentPhoto);
 
   console.log(imagesData.length);
 
@@ -101,21 +120,7 @@ $('#leftArrow').click(() => {
     console.log(currentPhoto);
   });
 
-let smallPhotos = ['images/1.png', 'images/2.png', 'images/3.png', 'images/4.png', 'images/5.png', 'images/6.png', 'images/7.png', 'images/8.png'];
-console.log(smallPhotos);
 
-smallPhotos.forEach ((smallPhoto, index) => {
-  $('.thumbnails').append(`<div class="thumbnailPhoto visible"><img src = "${smallPhoto}" data-number ="${index}"></div>`);
-  console.log(smallPhoto,index);
-});
-
-let smallPhotosTitles = ['Inside the Forest', 'Lucky Leaves', 'Rainbow', 'Happy Flowers', 'Forest Lake', 'Beauty in Nature', 'Butterflies', 'Towards the Sun...']
-console.log(smallPhotosTitles);
-
-smallPhotosTitles.forEach ((smallPhotoTitle, index) => {
-  $('.title').append(`<div class="thumbnailTitles" data-number="${index}"><p>${smallPhotoTitle} </p></div>`);
-  console.log(smallPhotoTitle,index);
-});
 
 
 $('.thumbnailPhoto').click((event) => {
@@ -123,30 +128,7 @@ $('.thumbnailPhoto').click((event) => {
   let numberIndex = parseInt(indexClicked);
   console.log(numberIndex);
   loadPhoto(numberIndex);
-
-  $('#rightArrow').click(() => {
-    if( numberIndex < imagesData.length-1){ 
-  numberIndex++;} 
-  else {
-    numberIndex = -1;
-    numberIndex++;
-  };
-  loadPhoto(numberIndex);
-  console.log(numberIndex);
-  });
-
-  $('#leftArrow').click(() => {
-    if(numberIndex > 0) { 
-    numberIndex--;}
-  else {
-    numberIndex = 8;
-    numberIndex--;
-  };
-    loadPhoto(numberIndex);
-    console.log(numberIndex);
-  });
-
-  
+  activateThumbnailPhoto(numberIndex);
 });
 
 
@@ -154,7 +136,9 @@ $('.thumbnailPhoto').mouseover ((event2) => {
   let photoHovered = $(event2.target).attr('data-number');
   let number2Index = parseInt(photoHovered);
   console.log(number2Index); 
- $('.thumbnailTitles').show();
+ $('.thumbnailTitles').show().css('visibility','hidden');
+ $('.thumbnailTitles:eq(' + number2Index + ')').css('visibility','visible');
+});
 
 $('.thumbnailPhoto').mouseleave ((event3) => {
   let photoHovered2 = $(event3.target).attr('data-number');
@@ -162,7 +146,6 @@ $('.thumbnailPhoto').mouseleave ((event3) => {
   console.log(number3Index);
   $('.thumbnailTitles').hide();
   });
-});
 
 
 

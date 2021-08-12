@@ -104,7 +104,11 @@ main {
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-radius: 3px;
-    /*display: none;*/
+    visibility: hidden;
+}
+
+.activeThumbnailPhoto::after {
+	visibility: visible;
 }
 
 .thumbnailPhoto img:hover {
@@ -117,7 +121,9 @@ main {
     display: flex;
     justify-content: space-between;
     width: 900px;
-    margin: 0 auto;   
+    margin: 0 auto; 
+    position: absolute;
+    top: -50px;  
 }
 
 .title .thumbnailTitles { 
