@@ -101,6 +101,7 @@ $('#rightArrow').click(() => {
     currentPhoto++;
   };
   loadPhoto(currentPhoto);
+  activateThumbnailPhoto(currentPhoto);
   console.log(currentPhoto);
 });
 
@@ -117,6 +118,7 @@ $('#leftArrow').click(() => {
     currentPhoto--;
   };
     loadPhoto(currentPhoto);
+    activateThumbnailPhoto(currentPhoto);
     console.log(currentPhoto);
   });
 
