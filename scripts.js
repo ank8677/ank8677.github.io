@@ -124,6 +124,7 @@ $('#leftArrow').click(() => {
 
 
 
+  
 
 $('.thumbnailPhoto').click((event) => {
   let indexClicked = $(event.target).attr('data-number');
